@@ -34,13 +34,13 @@ div > img{
 #hider{
     position: absolute;
     border-radius: 5px;
-    bottom: 5px;
+    bottom: 4px;
     color: white;
     background: rgba(0, 0, 0, 1);
     width: 100%;
-    height: calc(100% - 5px);
+    height: calc(100% - 4px);
 }
-.show{
+.remove{
     opacity: 0%;
     transition: .5s ease;
 }
