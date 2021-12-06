@@ -1,0 +1,29 @@
+header{
+    text-align: center;
+    background: gray;
+    padding-block: 25px;
+}
+header h1{
+    margin: 0;
+    font-size: 60px;
+}
+body{
+    margin: 0;
+    display: block;
+    height: 100vh;
+}
+#gameBoard{
+    height: max-content;
+    padding: 0;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 5px;
+}
+#gameBoard > img{
+    width: 100px;
+    display: block;
+    padding: 0;
+    margin: auto;
+}
