@@ -39,6 +39,7 @@ div > img{
     background: rgba(0, 0, 0, 1);
     width: 100%;
     height: calc(100% - 4px);
+    transition: .5s ease;
 }
 .remove{
     opacity: 0%;
