@@ -6,19 +6,30 @@ let firstCard = null
 let score = 0
 let lives = 5;
 function updateScore(num){
-    scoreCounter.textContent = `Score: ${score} + ${num}`
-    setTimeout(function(){
-        score += num
-        scoreCounter.textContent = `Score: ${score}`
-    }, 500)
+    if(score < 26){
+        scoreCounter.textContent = `Score: ${score} + ${num}`
+        setTimeout(function(){
+            score += num
+            scoreCounter.textContent = `Score: ${score}`
+            if(score > 25){
+                endGame("win") 
+                return
+            }
+        }, 500)
+    }
 }
 function updateLives(num){
-    livesCounter.textContent = `Lives: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
-    setTimeout(function(){
-        if(lives + num < 11)lives += num
-        livesCounter.textContent = `Lives: ${lives}`
-        if(lives < 1)gameOver()
-    }, 500)
+    if(lives < 1 && num < 0){
+        endGame()
+        return
+    }
+    if(lives > 0){
+        livesCounter.textContent = `Lives Remaining: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
+        setTimeout(function(){
+            lives += num
+            livesCounter.textContent = `Lives Remaining: ${lives}`
+        }, 500)
+    }
 }
 class Card{
     constructor(imgSrc, value){
@@ -72,7 +83,6 @@ class Card{
     }
 }
 
-
 (function initialize(){
     fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
     .then(res => res.json())
@@ -90,17 +100,19 @@ class Card{
     })
 })()
 
-
-function gameOver(){
-    board.style.display = "none"
-    let gameOver = document.createElement("h1")
-    gameOver.textContent = "GAME OVER"
-    gameOver.id = "gameOver"
-    body.appendChild(gameOver)
-    let playAgain = document.createElement("button")
-    playAgain.textContent = "Play Again?"
-    playAgain.addEventListener("click", function(){
-        location.reload()
-    })
-    body.appendChild(playAgain)
+function endGame(outcome){
+    if(!document.querySelector("#endScreen")){
+        board.style.display = "none"
+        let endScreen = document.createElement("h1")
+        endScreen.id = "endScreen"
+        if(outcome === "win")endScreen.textContent = "YOU WIN"
+        else endScreen.textContent = "YOU LOSE"
+        body.appendChild(endScreen)
+        let playAgain = document.createElement("button")
+        playAgain.textContent = "Play Again?"
+        playAgain.addEventListener("click", function(){
+            location.reload()
+        })
+        body.appendChild(playAgain)
+    }
 }

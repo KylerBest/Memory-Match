@@ -40,9 +40,7 @@ header h1{
     padding: 0;
     margin: auto;
 }
-#gameBoard > div:hover{
-    cursor: pointer;
-}
+
 div > img{
     width: 100px;
     padding: 0;
@@ -62,7 +60,7 @@ div > img{
     opacity: 0%;
     transition: .5s ease;
 }
-#gameOver{
+#endScreen{
     font-size: 100px;
     margin: auto;
     padding-block: 100px;
