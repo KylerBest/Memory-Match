@@ -1,7 +1,17 @@
 const board = document.querySelector("#gameBoard")
+const scoreCounter = document.querySelector("#score")
+const livesCounter = document.querySelector("#lives")
 let firstCard = null
 let score = 0
-let lives = 10;
+let lives = 5;
+function updateScore(num){
+    score += num
+    scoreCounter.textContent = `Score: ${score}`
+}
+function updateLives(num){
+    lives += num
+    livesCounter.textContent = `Lives: ${lives}`
+}
 class Card{
     constructor(imgSrc, value){
         this.img = document.createElement("img")
@@ -37,14 +47,13 @@ class Card{
         setTimeout(() => {
             if(firstCard){
                 if(firstCard.value === this.value){
-                    score++
-                    console.log(score)
+                    updateScore(1)
+                    updateLives(3)
                     this.remove()
                     firstCard.remove()
                     firstCard = null
                 }else{
-                    lives--
-                    console.log(lives)
+                    updateLives(-1)
                     this.reset()
                     firstCard.reset()
                     firstCard = null

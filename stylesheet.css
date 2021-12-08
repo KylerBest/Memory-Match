@@ -1,16 +1,28 @@
-header{
-    text-align: center;
-    background: gray;
-    padding-block: 25px;
-}
-header h1{
-    margin: 0;
-    font-size: 60px;
-}
 body{
     margin: auto;
     display: block;
     height: 100vh;
+    background: rgb(154,173,189);
+    background: radial-gradient(circle, rgba(154,173,189,1) 0%, rgba(146,146,209,1) 61%, rgba(13,144,171,1) 100%);
+}
+header{
+    background: white;
+    margin-inline: 20px;
+    margin-block: 20px;
+    border: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    text-align: center;
+    padding-block: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+header p{
+    font-size: 20px;
+}
+header h1{
+    margin: 0;
+    font-size: 50px;
 }
 #gameBoard{
     height: 80vh;
