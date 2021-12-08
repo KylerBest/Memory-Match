@@ -1,16 +1,24 @@
 const board = document.querySelector("#gameBoard")
+const body = document.querySelector("body")
 const scoreCounter = document.querySelector("#score")
 const livesCounter = document.querySelector("#lives")
 let firstCard = null
 let score = 0
 let lives = 5;
 function updateScore(num){
-    score += num
-    scoreCounter.textContent = `Score: ${score}`
+    scoreCounter.textContent = `Score: ${score} + ${num}`
+    setTimeout(function(){
+        score += num
+        scoreCounter.textContent = `Score: ${score}`
+    }, 500)
 }
 function updateLives(num){
-    lives += num
-    livesCounter.textContent = `Lives: ${lives}`
+    livesCounter.textContent = `Lives: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
+    setTimeout(function(){
+        if(lives + num < 11)lives += num
+        livesCounter.textContent = `Lives: ${lives}`
+        if(lives < 1)gameOver()
+    }, 500)
 }
 class Card{
     constructor(imgSrc, value){
@@ -43,7 +51,6 @@ class Card{
     }
     onCardClick = () => {
         this.reveal()
-        console.log(this.parent)
         setTimeout(() => {
             if(firstCard){
                 if(firstCard.value === this.value){
@@ -65,6 +72,7 @@ class Card{
     }
 }
 
+
 (function initialize(){
     fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
     .then(res => res.json())
@@ -72,13 +80,27 @@ class Card{
         fetch(`https://deckofcardsapi.com/api/deck/${json.deck_id}/draw/?count=52`)
         .then(res => res.json())
         .then(json => {
-            console.log(json)
             for(const card of json.cards){
                 new Card(card.image, card.code[0])
             }
         })
-    .catch(function(){
-        alert("Error: could not load cards.")
+        .catch(function(){
+            alert("Error: could not load cards.")
+        })
     })
-})
-})();
+})()
+
+
+function gameOver(){
+    board.style.display = "none"
+    let gameOver = document.createElement("h1")
+    gameOver.textContent = "GAME OVER"
+    gameOver.id = "gameOver"
+    body.appendChild(gameOver)
+    let playAgain = document.createElement("button")
+    playAgain.textContent = "Play Again?"
+    playAgain.addEventListener("click", function(){
+        location.reload()
+    })
+    body.appendChild(playAgain)
+}

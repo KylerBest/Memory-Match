@@ -1,14 +1,16 @@
 body{
+    text-align: center;
+    align-items: center;
     margin: auto;
     display: block;
-    height: 100vh;
+    height: 98vh;
     background: rgb(154,173,189);
     background: radial-gradient(circle, rgba(154,173,189,1) 0%, rgba(146,146,209,1) 61%, rgba(13,144,171,1) 100%);
 }
 header{
     background: white;
     margin-inline: 20px;
-    margin-block: 20px;
+    margin-block: 10px;
     border: 3px;
     border-style: solid;
     border-radius: 15px;
@@ -38,6 +40,9 @@ header h1{
     padding: 0;
     margin: auto;
 }
+#gameBoard > div:hover{
+    cursor: pointer;
+}
 div > img{
     width: 100px;
     padding: 0;
@@ -56,4 +61,14 @@ div > img{
 .remove{
     opacity: 0%;
     transition: .5s ease;
+}
+#gameOver{
+    font-size: 100px;
+    margin: auto;
+    padding-block: 100px;
+}
+button{
+    width: 200px;
+    height: 50px;
+    font-size: 30px;
 }
