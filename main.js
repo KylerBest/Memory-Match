@@ -1,4 +1,4 @@
-const board = document.querySelector("#gameBoard")
+window.addEventListener("DOMContentLoaded", function(){const board = document.querySelector("#gameBoard")
 const body = document.querySelector("body")
 const scoreCounter = document.querySelector("#score")
 const livesCounter = document.querySelector("#lives")
@@ -116,7 +116,7 @@ function endGame(outcome) {
         endScreen.id = "endScreen"
         if (outcome === "win"){
             endScreen.textContent = "YOU WIN"
-            num = 3
+            hsLives = 3
         }
         else endScreen.textContent = "YOU LOSE"
         container.appendChild(endScreen)
@@ -144,4 +144,4 @@ function endGame(outcome) {
 
         body.appendChild(container)
     }
-}
+}})
