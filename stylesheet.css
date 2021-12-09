@@ -63,10 +63,36 @@ div > img{
 #endScreen{
     font-size: 100px;
     margin: auto;
-    padding-block: 100px;
+    grid-area: a;
 }
 button{
     width: 200px;
     height: 50px;
     font-size: 30px;
+    margin: auto;
+    grid-area: e;
+}
+#endScreenContainer{
+    margin-top: 150px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "a a"
+                         "b b"
+                         "c d"
+                         "e e";
+}
+h2{
+    margin: auto;
+    grid-area: b;
+}
+#endLives{
+    float: right;
+    grid-area: c;
+    margin-left: 250px;
+}
+#endScore{
+    margin-right: 250px;
+    float: left;
+    grid-area: d;
 }
