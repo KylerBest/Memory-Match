@@ -23,7 +23,7 @@ function updateLives(num){
         endGame()
         return
     }
-    if(lives > 0){
+    if(lives >= 0){
         livesCounter.textContent = `Lives Remaining: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
         setTimeout(function(){
             lives += num
