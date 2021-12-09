@@ -86,7 +86,9 @@ button{
                          "e e";
     border-style: solid;
     border-radius: 50px;
-    margin-inline: 300px;
+    width: 750px;
+    margin-top: 100px;
+    margin-inline: auto;
 }
 h2{
     margin: auto;
