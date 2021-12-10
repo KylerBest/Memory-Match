@@ -74,9 +74,9 @@ button{
     grid-area: e;
 }
 #endScreenContainer{
-    box-shadow: 0px 0px 50px;
+    box-shadow: 0 0 20px;
     background: white;
-    margin-top: 150px;
+    margin-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -86,9 +86,43 @@ button{
                          "e e";
     border-style: solid;
     border-radius: 50px;
+    border: 2px;
     width: 750px;
-    margin-top: 100px;
     margin-inline: auto;
+    height: 20rem;
+}
+#leaderBoard{
+    text-align: justify;
+    border: 2px;
+    margin-top: 50px;
+    box-shadow: 0 0 20px;
+    background: white;
+    border-style: solid;
+    border-radius: 50px;
+    width: 750px;
+    margin-inline: auto;
+    height: 20rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "a b"
+                         "a c";
+}
+#formHeader{
+    grid-area: b;
+    margin-bottom: 0;
+}
+#hsList{
+    margin: auto;
+    margin-top: 3rem;
+}
+form{
+    margin: auto;
+    margin-top: 1em;
+    grid-area: c;
+}
+li{
+    font-size: 18px;
 }
 h2{
     margin: auto;

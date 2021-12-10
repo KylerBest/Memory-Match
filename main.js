@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("DOMContentLoaded", function () {
     const board = document.querySelector("#gameBoard")
     const body = document.querySelector("body")
     const scoreCounter = document.querySelector("#score")
@@ -115,11 +115,10 @@ window.addEventListener("DOMContentLoaded", function(){
 
             let endScreen = document.createElement("h1")
             endScreen.id = "endScreen"
-            if (outcome === "win"){
+            if (outcome === "win") {
                 endScreen.textContent = "YOU WIN"
                 hsLives = 3
-            }
-            else endScreen.textContent = "YOU LOSE"
+            } else endScreen.textContent = "YOU LOSE"
             container.appendChild(endScreen)
 
             let highScore = document.createElement("h2")
@@ -144,6 +143,83 @@ window.addEventListener("DOMContentLoaded", function(){
             container.appendChild(playAgain)
 
             body.appendChild(container)
+
+
+            let topPlayers = document.createElement("ol")
+            topPlayers.id = "hsList"
+
+            let rankingsHeader = document.createElement("h2")
+            rankingsHeader.textContent = "Top Scores:"
+            topPlayers.appendChild(rankingsHeader)
+
+            fetch("http://localhost:3000/high_scores")
+                .then(res => res.json())
+                .then(json => {
+                    for (let i = 0; i < 5; i++) {
+                        if (json[i]) {
+                            let highScore = document.createElement("li")
+                            highScore.textContent = `${json[i].name}: ${json[i].lives} lives - ${json[i].points} points`
+                            topPlayers.appendChild(highScore)
+                        }
+                    }
+                })
+                .catch(function () {
+                    let errorMsg = document.createElement("p")
+                    errorMsg.textContent = "Error: could not load players."
+                    topPlayers.appendChild(errorMsg)
+                })
+
+            let leaderBoard = document.createElement("div")
+            leaderBoard.appendChild(topPlayers)
+
+            let formHeader = document.createElement("h2")
+            formHeader.id = "formHeader"
+            formHeader.textContent = "Submit Your Score:"
+            leaderBoard.appendChild(formHeader)
+
+            let submitScoreForm = document.createElement("form")
+            let label = document.createElement("label")
+            label.htmlFor = "submitYourScore"
+            let nameInput = document.createElement("input")
+            nameInput.id = "submitYourScore"
+            nameInput.type = "text"
+            nameInput.placeholder = "Enter Name"
+            let submitButton = document.createElement("input")
+            submitButton.type = "submit"
+            submitScoreForm.appendChild(label)
+            submitScoreForm.appendChild(nameInput)
+            submitScoreForm.appendChild(submitButton)
+            submitScoreForm.addEventListener("submit", (e) => {
+                e.preventDefault()
+                console.log(e)
+                fetch("http://localhost:3000/high_scores", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: e.target.children[1].value,
+                        points: score,
+                        lives: lives
+                    })
+                })
+                fetch("http://localhost:3000/high_scores")
+                    .then(res => res.json())
+                    .then(json => {
+                        for (let i = 0; i < 5; i++) {
+                            if (json[i]) {
+                                let highScore = document.createElement("li")
+                                highScore.textContent = `${json[i].name}: ${json[i].lives} lives - ${json[i].points} points`
+                                topPlayers.appendChild(highScore)
+                            }
+                        }
+                    })
+                submitScoreForm.reset()
+            })
+
+            leaderBoard.appendChild(submitScoreForm)
+            leaderBoard.id = "leaderBoard"
+            body.appendChild(leaderBoard)
         }
     }
 })
