@@ -104,22 +104,19 @@ button{
     height: 20rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "a b"
-                         "a c";
+    grid-template-areas: "a b";
 }
 #formHeader{
     grid-area: b;
-    margin-bottom: 0;
+    margin-top: 25%;
 }
 #hsList{
-    margin: auto;
+    margin-inline: 3rem;
     margin-top: 3rem;
 }
 form{
     margin: auto;
-    margin-top: 1em;
-    grid-area: c;
+    grid-area: b;
 }
 li{
     font-size: 18px;

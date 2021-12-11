@@ -189,7 +189,7 @@ window.addEventListener("DOMContentLoaded", function () {
             formHeader.id = "formHeader"
             formHeader.textContent = "Submit Your Score:"
             leaderBoard.appendChild(formHeader)
-
+            
             let submitScoreForm = document.createElement("form")
             let label = document.createElement("label")
             label.htmlFor = "submitYourScore"

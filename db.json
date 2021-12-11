@@ -1,37 +1,37 @@
 {
   "high_scores": [
     {
-      "name": "toogoodatthisgame",
+      "name": "Jim",
       "points": 26,
       "lives": 24,
       "id": 1
     },
     {
-      "name": "bruh",
+      "name": "Joe",
       "points": 5,
       "lives": 0,
       "id": 2
     },
     {
-      "name": "blahblahblah",
+      "name": "Jack",
       "points": 4,
       "lives": 0,
       "id": 3
     },
     {
-      "name": "poo",
+      "name": "Jeff",
       "points": 22,
       "lives": 0,
       "id": 4
     },
     {
-      "name": "foo",
+      "name": "Joe",
       "points": 13,
       "lives": 0,
       "id": 5
     },
     {
-      "name": "fiz",
+      "name": "Josh",
       "points": 26,
       "lives": 13,
       "id": 6
