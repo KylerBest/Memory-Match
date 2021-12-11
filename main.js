@@ -27,10 +27,10 @@ window.addEventListener("DOMContentLoaded", function () {
             return
         }
         if (lives >= 0) {
-            livesCounter.textContent = `Lives Remaining: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
+            livesCounter.textContent = `Lives left: ${lives} ${num < 0 ? `- ${Math.abs(num)}` : `+ ${num}`}`
             setTimeout(function () {
                 lives += num
-                livesCounter.textContent = `Lives Remaining: ${lives}`
+                livesCounter.textContent = `Lives left: ${lives}`
             }, 500)
         }
     }
@@ -172,7 +172,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     }
                     for(const score of sortedScores){
                         let li = document.createElement("li")
-                        li.textContent = `${score.name}: ${score.points} points + ${score.lives} lives remaining`
+                        li.textContent = `${score.name}: ${score.points} points + ${score.lives} lives left`
                         topPlayers.appendChild(li)
                     }
                 })
@@ -189,7 +189,7 @@ window.addEventListener("DOMContentLoaded", function () {
             formHeader.id = "formHeader"
             formHeader.textContent = "Submit Your Score:"
             leaderBoard.appendChild(formHeader)
-            
+
             let submitScoreForm = document.createElement("form")
             let label = document.createElement("label")
             label.htmlFor = "submitYourScore"
