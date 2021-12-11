@@ -155,12 +155,25 @@ window.addEventListener("DOMContentLoaded", function () {
             fetch("http://localhost:3000/high_scores")
                 .then(res => res.json())
                 .then(json => {
-                    for (let i = 0; i < 5; i++) {
-                        if (json[i]) {
-                            let highScore = document.createElement("li")
-                            highScore.textContent = `${json[i].name}: ${json[i].lives} lives - ${json[i].points} points`
-                            topPlayers.appendChild(highScore)
+                    //find the top 5 highest scores in db.json and display them on the leaderboard
+                    let highScores = [...json]
+                    let sortedScores = []
+                    for(let i = 0; i < 5; i++){
+                        let biggestNum = 0
+                        let index = 0
+                        for(let j = 0; j < highScores.length; j++){
+                            let currentNum = highScores[j].points + highScores[j].lives
+                            if(currentNum > biggestNum){
+                                biggestNum = currentNum
+                                index = j
+                            }
                         }
+                        sortedScores.push(highScores.splice(index, 1)[0])
+                    }
+                    for(const score of sortedScores){
+                        let li = document.createElement("li")
+                        li.textContent = `${score.name}: ${score.points} points + ${score.lives} lives remaining`
+                        topPlayers.appendChild(li)
                     }
                 })
                 .catch(function () {
@@ -191,7 +204,8 @@ window.addEventListener("DOMContentLoaded", function () {
             submitScoreForm.appendChild(submitButton)
             submitScoreForm.addEventListener("submit", (e) => {
                 e.preventDefault()
-                console.log(e)
+                submitButton.disabled = true
+                nameInput.disabled = true
                 fetch("http://localhost:3000/high_scores", {
                     method: 'POST',
                     headers: {
@@ -203,17 +217,6 @@ window.addEventListener("DOMContentLoaded", function () {
                         lives: lives
                     })
                 })
-                fetch("http://localhost:3000/high_scores")
-                    .then(res => res.json())
-                    .then(json => {
-                        for (let i = 0; i < 5; i++) {
-                            if (json[i]) {
-                                let highScore = document.createElement("li")
-                                highScore.textContent = `${json[i].name}: ${json[i].lives} lives - ${json[i].points} points`
-                                topPlayers.appendChild(highScore)
-                            }
-                        }
-                    })
                 submitScoreForm.reset()
             })
 
