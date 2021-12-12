@@ -125,14 +125,9 @@ window.addEventListener("DOMContentLoaded", function () {
             highScore.textContent = "Score:"
             container.appendChild(highScore)
 
-            let endLives = document.createElement("h3")
-            endLives.id = "endLives"
-            endLives.textContent = `Lives: ${(lives + hsLives).toString()}`
-            container.appendChild(endLives)
-
             let endScore = document.createElement("h3")
             endScore.id = "endScore"
-            endScore.textContent = `Points: ${score.toString()}`
+            endScore.textContent = `${score} points + ${lives} lives`
             container.appendChild(endScore)
 
             let playAgain = document.createElement("button")
@@ -155,14 +150,14 @@ window.addEventListener("DOMContentLoaded", function () {
             fetch("http://localhost:3000/high_scores")
                 .then(res => res.json())
                 .then(json => {
-                    //find the top 5 highest scores in db.json and display them on the leaderboard
+                    //find the top 10 (or less) highest scores in db.json and display them on the leaderboard
                     let highScores = [...json]
                     let sortedScores = []
-                    for(let i = 0; i < 5; i++){
+                    for(let i = 0; i < (json.length < 10 ? json.length : 10); i++){
                         let biggestNum = 0
                         let index = 0
                         for(let j = 0; j < highScores.length; j++){
-                            let currentNum = highScores[j].points + highScores[j].lives
+                            let currentNum = highScores[j].totalScore
                             if(currentNum > biggestNum){
                                 biggestNum = currentNum
                                 index = j
@@ -172,7 +167,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     }
                     for(const score of sortedScores){
                         let li = document.createElement("li")
-                        li.textContent = `${score.name}: ${score.points} points + ${score.lives} lives left`
+                        li.textContent = `${score.name}: ${score.totalScore}`
                         topPlayers.appendChild(li)
                     }
                 })
@@ -213,8 +208,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     },
                     body: JSON.stringify({
                         name: e.target.children[1].value,
-                        points: score,
-                        lives: lives
+                        totalScore: score + lives
                     })
                 })
                 submitScoreForm.reset()

@@ -1,137 +1,129 @@
-body{
-    text-align: center;
-    align-items: center;
-    margin: auto;
-    display: block;
-    height: 98vh;
-    background: rgb(154,173,189);
-    background: radial-gradient(circle, rgba(154,173,189,1) 0%, rgba(146,146,209,1) 61%, rgba(13,144,171,1) 100%);
+body {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  display: block;
+  height: 98vh;
+  background: rgb(154, 173, 189);
+  background: radial-gradient(
+    circle,
+    rgba(154, 173, 189, 1) 0%,
+    rgba(146, 146, 209, 1) 61%,
+    rgba(13, 144, 171, 1) 100%
+  );
 }
-header{
-    box-shadow: 0px 0px 20px;
-    background: white;
-    margin-inline: 20px;
-    margin-block: 10px;
-    border: 1px;
-    border-style: solid;
-    border-radius: 15px;
-    text-align: center;
-    padding-block: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+header {
+  box-shadow: 0px 0px 20px;
+  background: white;
+  margin-inline: 20px;
+  margin-block: 10px;
+  border: 1px;
+  border-style: solid;
+  border-radius: 15px;
+  text-align: center;
+  padding-block: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
-header p{
-    font-size: 20px;
+header p {
+  font-size: 20px;
 }
-header h1{
-    margin: 0;
-    font-size: 50px;
+header h1 {
+  margin: 0;
+  font-size: 50px;
 }
-#gameBoard{
-    height: 80vh;
-    padding: 15px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+#gameBoard {
+  height: 80vh;
+  padding: 15px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
-#gameBoard > div{
-    position: relative;
-    display: block;
-    padding: 0;
-    margin: auto;
+#gameBoard > div {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: auto;
 }
 
-div > img{
-    width: 100px;
-    padding: 0;
-    margin: 0;
+div > img {
+  width: 100px;
+  padding: 0;
+  margin: 0;
 }
-#hider{
-    position: absolute;
-    border-radius: 5px;
-    bottom: 4px;
-    color: white;
-    background: rgba(0, 0, 0, 1);
-    width: 100%;
-    height: calc(100% - 4px);
-    transition: .5s ease;
+#hider {
+  position: absolute;
+  border-radius: 5px;
+  bottom: 4px;
+  color: white;
+  background: rgba(0, 0, 0, 1);
+  width: 100%;
+  height: calc(100% - 4px);
+  transition: 0.5s ease;
 }
-.remove{
-    opacity: 0%;
-    transition: .5s ease;
+.remove {
+  opacity: 0%;
+  transition: 0.5s ease;
 }
-#endScreen{
-    font-size: 100px;
-    margin: auto;
-    grid-area: a;
+#endScreen {
+  font-size: 100px;
+  margin: auto;
 }
-button{
-    width: 200px;
-    height: 50px;
-    font-size: 30px;
-    margin: auto;
-    grid-area: e;
+button {
+  width: 200px;
+  height: 50px;
+  font-size: 30px;
+  margin: auto;
 }
-#endScreenContainer{
-    box-shadow: 0 0 20px;
-    background: white;
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-areas: "a a"
-                         "b b"
-                         "c d"
-                         "e e";
-    border-style: solid;
-    border-radius: 50px;
-    border: 2px;
-    width: 750px;
-    margin-inline: auto;
-    height: 20rem;
+#endScreenContainer {
+  box-shadow: 0 0 20px;
+  background: white;
+  margin-top: 25px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  border-style: solid;
+  border-radius: 50px;
+  border: 2px;
+  width: 750px;
+  margin-inline: auto;
+  height: 20rem;
 }
-#leaderBoard{
-    text-align: justify;
-    border: 2px;
-    margin-top: 50px;
-    box-shadow: 0 0 20px;
-    background: white;
-    border-style: solid;
-    border-radius: 50px;
-    width: 750px;
-    margin-inline: auto;
-    height: 20rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "a b";
+#leaderBoard {
+  text-align: justify;
+  border: 2px;
+  margin-top: 25px;
+  box-shadow: 0 0 20px;
+  background: white;
+  border-style: solid;
+  border-radius: 50px;
+  width: 750px;
+  margin-inline: auto;
+  height: 20rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "a b";
 }
-#formHeader{
-    grid-area: b;
-    margin-top: 25%;
+#formHeader {
+  grid-area: b;
+  margin-top: 25%;
 }
-#hsList{
-    margin-inline: 3rem;
-    margin-top: 3rem;
+#hsList {
+  text-align: center;
+  margin-left: 5rem;
+  margin-right: 3rem;
+  margin-top: 3rem;
 }
-form{
-    margin: auto;
-    grid-area: b;
+form {
+  margin: auto;
+  grid-area: b;
 }
-li{
-    font-size: 18px;
+li {
+  font-size: 18px;
 }
-h2{
-    margin: auto;
-    grid-area: b;
+h2 {
+  margin: auto;
 }
-#endLives{
-    float: right;
-    grid-area: c;
-    margin-left: 250px;
-}
-#endScore{
-    margin-right: 250px;
-    float: left;
-    grid-area: d;
+#endScore {
+  margin: auto;
 }

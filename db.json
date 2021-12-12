@@ -1,46 +1,24 @@
 {
   "high_scores": [
     {
-      "name": "Jim",
-      "points": 26,
-      "lives": 24,
+      "name": "Kyler",
+      "totalScore": 60,
       "id": 1
     },
     {
-      "name": "Joe",
-      "points": 5,
-      "lives": 0,
+      "name": "Dad",
+      "totalScore": 53,
       "id": 2
     },
     {
-      "name": "Jack",
-      "points": 4,
-      "lives": 0,
+      "name": "Scotti",
+      "totalScore": 87,
       "id": 3
     },
     {
-      "name": "Jeff",
-      "points": 22,
-      "lives": 0,
+      "name": "Mom",
+      "totalScore": 73,
       "id": 4
-    },
-    {
-      "name": "Joe",
-      "points": 13,
-      "lives": 0,
-      "id": 5
-    },
-    {
-      "name": "Josh",
-      "points": 26,
-      "lives": 13,
-      "id": 6
-    },
-    {
-      "name": "Kyler",
-      "points": 26,
-      "lives": 34,
-      "id": 7
     }
   ]
 }
