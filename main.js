@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const scoreCounter = document.querySelector("#score")
     const livesCounter = document.querySelector("#lives")
     let firstCard = null
-    let score = 0
+    let score = 10
     let lives = 5;
 
     function updateScore(num) {
@@ -231,7 +231,7 @@ window.addEventListener("DOMContentLoaded", function () {
                             //in the correct position on the list
                             let index = -1
                             for(let i = 0; i < list.querySelectorAll("li").length; i++){
-                                if(parseInt(list.querySelectorAll("li")[i].textContent.split(' ')[1]) <= score + lives){
+                                if(parseInt(list.querySelectorAll("li")[i].textContent.split(': ')[1]) <= score + lives){
                                     index = i
                                     break
                                 }
@@ -266,7 +266,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         })
                         .then(() => {
                             for(const li of list.querySelectorAll("li")){
-                                if(parseInt(li.textContent.split(' ')[1]) <= score + lives && li.textContent.split(' ')[0] == `${input}:`){
+                                if(parseInt(li.textContent.split(': ')[1]) <= score + lives && li.textContent.split(': ')[0] == input){
                                     li.textContent = `${input}: ${score + lives}`
                                     li.style.background = "yellow"
                                     break
