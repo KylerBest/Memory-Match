@@ -19,6 +19,21 @@
       "name": "Mom",
       "totalScore": 73,
       "id": 4
+    },
+    {
+      "name": "Joe Biden",
+      "totalScore": 5,
+      "id": 5
+    },
+    {
+      "name": "Patrick",
+      "totalScore": 62,
+      "id": 6
+    },
+    {
+      "name": "matt",
+      "totalScore": 107,
+      "id": 7
     }
   ]
 }

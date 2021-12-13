@@ -70,8 +70,8 @@ window.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
                 if (firstCard) {
                     if (firstCard.value === this.value) {
-                        updateScore(1)
                         updateLives(3)
+                        updateScore(1)
                         this.remove()
                         firstCard.remove()
                         firstCard = null
@@ -106,7 +106,6 @@ window.addEventListener("DOMContentLoaded", function () {
     })()
 
     function endGame(outcome) {
-        let hsLives = 0
         if (!document.querySelector("#endScreen")) {
             board.style.display = "none"
 
@@ -127,7 +126,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
             let endScore = document.createElement("h3")
             endScore.id = "endScore"
-            endScore.textContent = `${score} points + ${lives} lives`
+            endScore.textContent = `${score} points + ${lives} lives = ${score + lives} total`
             container.appendChild(endScore)
 
             let playAgain = document.createElement("button")
@@ -139,9 +138,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
             body.appendChild(container)
 
-
+            let leaderBoard = document.createElement("div")
+            
+            let leaderBoardHeader = document.createElement("h1")
+            leaderBoardHeader.textContent = "Leaderboard"
+            leaderBoardHeader.id = "leaderBoardHeader"
+            leaderBoard.appendChild(leaderBoardHeader)
+            
             let topPlayers = document.createElement("ol")
             topPlayers.id = "hsList"
+            leaderBoard.appendChild(topPlayers)
 
             let rankingsHeader = document.createElement("h2")
             rankingsHeader.textContent = "Top Scores:"
@@ -177,13 +183,14 @@ window.addEventListener("DOMContentLoaded", function () {
                     topPlayers.appendChild(errorMsg)
                 })
 
-            let leaderBoard = document.createElement("div")
-            leaderBoard.appendChild(topPlayers)
+
+            let formContainer = document.createElement("div")
+            formContainer.id = "formContainer"
 
             let formHeader = document.createElement("h2")
             formHeader.id = "formHeader"
             formHeader.textContent = "Submit Your Score:"
-            leaderBoard.appendChild(formHeader)
+            formContainer.appendChild(formHeader)
 
             let submitScoreForm = document.createElement("form")
             let label = document.createElement("label")
@@ -199,22 +206,94 @@ window.addEventListener("DOMContentLoaded", function () {
             submitScoreForm.appendChild(submitButton)
             submitScoreForm.addEventListener("submit", (e) => {
                 e.preventDefault()
+                let input = e.target.children[1].value
                 submitButton.disabled = true
                 nameInput.disabled = true
-                fetch("http://localhost:3000/high_scores", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: e.target.children[1].value,
-                        totalScore: score + lives
-                    })
+                fetch("http://localhost:3000/high_scores")
+                .then(res => res.json())
+                .then(json => {
+                    let list = document.querySelector("#hsList")
+                    const post = () => {
+                        fetch("http://localhost:3000/high_scores", {
+                            method: 'POST',
+                            headers: {
+                            'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: input,
+                                totalScore: score + lives
+                            })
+                        })
+                        .then(() => {
+                            //Look through the listed entries on the leaderboard when we submit a new one
+                            //if the newly submitted score is better than one of the listed scores
+                            //remove the lowest-ranked score on the list and display our new score 
+                            //in the correct position on the list
+                            let index = -1
+                            for(let i = 0; i < list.querySelectorAll("li").length; i++){
+                                if(parseInt(list.querySelectorAll("li")[i].textContent.split(' ')[1]) <= score + lives){
+                                    index = i
+                                    break
+                                }
+                            }
+                            if(index > -1){
+                                let newLi = document.createElement("li")
+                                newLi.textContent = `${input}: ${score + lives}`
+                                newLi.style.background = "yellow"
+                                list.insertBefore(newLi, list.querySelectorAll("li")[index])
+                                if(list.querySelectorAll("li").length > 10){
+                                    list.querySelectorAll("li")[list.querySelectorAll("li").length-1].remove()
+                                }
+                            }
+                            else if(list.querySelectorAll("li").length < 10){
+                                let newLi = document.createElement("li")
+                                newLi.textContent = `${input}: ${score + lives}`
+                                newLi.style.background = "yellow"
+                                list.appendChild(newLi)
+                            }
+                        })
+                    }
+                    const patch = (id) => {
+                        fetch(`http://localhost:3000/high_scores/${id}`, {
+                            method: 'PATCH',
+                            headers: {
+                            'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: input,
+                                totalScore: score + lives
+                            })
+                        })
+                        .then(() => {
+                            for(const li of list.querySelectorAll("li")){
+                                if(parseInt(li.textContent.split(' ')[1]) <= score + lives && li.textContent.split(' ')[0] == `${input}:`){
+                                    li.textContent = `${input}: ${score + lives}`
+                                    li.style.background = "yellow"
+                                    break
+                                }
+                            }
+                        })
+                    }
+                    let entryExists = false
+                    for(const entry of json){
+                        //if a leaderboard entry with the entered name already exists AND it's a lower score than the current one
+                        //we don't want to submit a duplicate entry, just update the one that's there
+                        if(entry.name == input){
+                            entryExists = true
+                            if(entry.totalScore < score + lives){
+                                patch(entry.id)
+                            }
+                            break
+                        }
+                    }
+                    if(!entryExists)post()
+                    
                 })
                 submitScoreForm.reset()
             })
 
-            leaderBoard.appendChild(submitScoreForm)
+            formContainer.appendChild(submitScoreForm)
+            leaderBoard.appendChild(formContainer)
             leaderBoard.id = "leaderBoard"
             body.appendChild(leaderBoard)
         }

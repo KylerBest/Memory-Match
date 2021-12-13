@@ -69,25 +69,38 @@ div > img {
 #endScreen {
   font-size: 100px;
   margin: auto;
+  grid-area: a;
 }
 button {
   width: 200px;
   height: 50px;
   font-size: 30px;
   margin: auto;
+  grid-area: c;
 }
 #endScreenContainer {
   box-shadow: 0 0 20px;
   background: white;
   margin-top: 25px;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "a" "b" "c";
   border-style: solid;
   border-radius: 50px;
   border: 2px;
   width: 750px;
   margin-inline: auto;
   height: 20rem;
+}
+h2 {
+  margin: auto;
+  margin-top: 1rem;
+  grid-area: b;
+}
+#endScore {
+  margin: auto;
+  grid-area: b;
+  margin-bottom: 1rem;
 }
 #leaderBoard {
   text-align: justify;
@@ -102,28 +115,29 @@ button {
   height: 20rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "a b";
+  grid-template-rows: 20% auto;
+  grid-template-areas: "a a";
 }
-#formHeader {
-  grid-area: b;
-  margin-top: 25%;
+#formContainer {
+  height: fit-content;
+  margin: auto;
+  margin-top: 3rem;
 }
 #hsList {
   text-align: center;
-  margin-left: 5rem;
-  margin-right: 3rem;
-  margin-top: 3rem;
+  margin: auto;
+  height: fit-content;
+  padding: 0;
 }
 form {
   margin: auto;
-  grid-area: b;
 }
 li {
-  font-size: 18px;
+  font-size: 15px;
 }
-h2 {
+#leaderBoardHeader {
+  height: fit-content;
+  grid-area: a;
   margin: auto;
-}
-#endScore {
-  margin: auto;
+  font-size: 75px;
 }
