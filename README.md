@@ -1,9 +1,20 @@
-# phase-1-project
-
-This project will be a memory-match card game using https://deckofcardsapi.com.
-Near the top of the page will be a couple of features:
-
-1. A score counter - this will keep track of how many pairs of cards have been removed from the board.
-2. A lives counter - initializes with a value of 3.
-
-The player will click a card to show its value, and then a second card. If the second card's value is equal to the first's both cards are removed and the player gains a point. Otherwise, both cards flip back over and the player loses a life. If the player loses all three lives, the game is lost and the player is prompted to play again.
+# Memory-Match
+My phase 1 project idea uses https://deckofcardsapi.com to create a memory-match type game. The goal of the game is to remove every pair of cards. 
+# Here's how it works:
+The cards laid out face-down on the board. If you click on a card, the face of the card is revealed until you click on a second card.
+If the second card you click is the same as the first (suit doesn't matter), then you've made a match and both cards are removed from the board.
+https://cdn-images-1.medium.com/max/800/1*Qq8ZKxYk9fl3zZfJ7D_PvQ.gif
+# Lives:
+To make the game more interesting, I've added some lives. You start with 5.
+When a match is made, you gain 3 lives. If the match is unsuccessful, you lose 1 life.
+You can find the lives counter at the top left of the screen.
+# Points:
+I've also added a points counter that goes up by one for every match you make.
+You can find it at the top right of the screen.
+# End of the game:
+The game will end if you either run out of lives, or you match every single pair on the board.
+When the game ends, you are shown the respective 'YOU WIN' or 'YOU LOSE' screen, which includes
+a 'Play Again?' button, as well as a Leaderboard which you can submit your score to. The leaderboard 
+works with JSON-server https://www.npmjs.com/package/json-server so the ranks are saved after reloading 
+the page. When you submit your score, you fill out a form with your name and the leaderboard gets updated 
+immediately. https://cdn-images-1.medium.com/max/800/1*BNDF0wEsPUXo0mBXr8vN0A.gif
