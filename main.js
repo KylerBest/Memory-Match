@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const scoreCounter = document.querySelector("#score")
     const livesCounter = document.querySelector("#lives")
     let firstCard = null
-    let score = 10
+    let score = 0
     let lives = 5;
 
     function updateScore(num) {
@@ -47,11 +47,28 @@ window.addEventListener("DOMContentLoaded", function () {
             this.parent = document.createElement("div")
             this.parent.appendChild(this.img)
             this.parent.appendChild(this.hider)
-            this.parent.addEventListener("click", this.onCardClick)
+            this.parent.addEventListener("click", () => {
+                this.reveal()
+                setTimeout(() => {
+                    if (firstCard) {
+                        if (firstCard.value === this.value) {
+                            updateLives(3)
+                            updateScore(1)
+                            this.remove()
+                            firstCard.remove()
+                            firstCard = null
+                        } else {
+                            updateLives(-1)
+                            this.reset()
+                            firstCard.reset()
+                            firstCard = null
+                        }
+                    } else {
+                        firstCard = this
+                    }
+                }, 1000)
+            })
             board.appendChild(this.parent)
-        }
-        get getThis() {
-            return this
         }
         reveal() {
             this.hider.classList.add("remove")
@@ -64,27 +81,6 @@ window.addEventListener("DOMContentLoaded", function () {
             this.hider.classList.remove("remove")
             this.parent.classList.remove("remove")
             this.parent.addEventListener("click", this.onCardClick)
-        }
-        onCardClick = () => {
-            this.reveal()
-            setTimeout(() => {
-                if (firstCard) {
-                    if (firstCard.value === this.value) {
-                        updateLives(3)
-                        updateScore(1)
-                        this.remove()
-                        firstCard.remove()
-                        firstCard = null
-                    } else {
-                        updateLives(-1)
-                        this.reset()
-                        firstCard.reset()
-                        firstCard = null
-                    }
-                } else {
-                    firstCard = this
-                }
-            }, 1000)
         }
     }
 
