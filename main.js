@@ -209,6 +209,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 .then(res => res.json())
                 .then(json => {
                     let list = document.querySelector("#hsList")
+                    let listItems = list.querySelectorAll("li")
                     const post = () => {
                         fetch("http://localhost:3000/high_scores", {
                             method: 'POST',
@@ -222,12 +223,12 @@ window.addEventListener("DOMContentLoaded", function () {
                         })
                         .then(() => {
                             //Look through the listed entries on the leaderboard when we submit a new one
-                            //if the newly submitted score is better than one of the listed scores
-                            //remove the lowest-ranked score on the list and display our new score 
-                            //in the correct position on the list
+                            //if the newly submitted score is better than one of the listed scores then
+                            //(if there are already 10 items on the list) remove the lowest-ranked score  
+                            //and display our new score in the correct position on the list
                             let index = -1
-                            for(let i = 0; i < list.querySelectorAll("li").length; i++){
-                                if(parseInt(list.querySelectorAll("li")[i].textContent.split(': ')[1]) <= score + lives){
+                            for(let i = 0; i < listItems.length; i++){
+                                if(parseInt(listItems[i].textContent.split(': ')[1]) <= score + lives){
                                     index = i
                                     break
                                 }
@@ -236,12 +237,12 @@ window.addEventListener("DOMContentLoaded", function () {
                                 let newLi = document.createElement("li")
                                 newLi.textContent = `${input}: ${score + lives}`
                                 newLi.style.background = "yellow"
-                                list.insertBefore(newLi, list.querySelectorAll("li")[index])
-                                if(list.querySelectorAll("li").length > 10){
-                                    list.querySelectorAll("li")[list.querySelectorAll("li").length-1].remove()
+                                list.insertBefore(newLi, listItems[index])
+                                if(listItems.length > 10){
+                                    listItems[listItems.length-1].remove()
                                 }
                             }
-                            else if(list.querySelectorAll("li").length < 10){
+                            else if(listItems.length < 10){
                                 let newLi = document.createElement("li")
                                 newLi.textContent = `${input}: ${score + lives}`
                                 newLi.style.background = "yellow"
@@ -261,7 +262,7 @@ window.addEventListener("DOMContentLoaded", function () {
                             })
                         })
                         .then(() => {
-                            for(const li of list.querySelectorAll("li")){
+                            for(const li of listItems){
                                 if(parseInt(li.textContent.split(': ')[1]) <= score + lives && li.textContent.split(': ')[0] == input){
                                     li.textContent = `${input}: ${score + lives}`
                                     li.style.background = "yellow"
