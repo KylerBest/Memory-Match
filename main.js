@@ -8,17 +8,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let lives = 5
 
     function updateScore(num) {
-        if (score < 26) {
-            scoreCounter.textContent = `Points: ${score} + ${num}`
-            setTimeout(function () {
-                score += num
-                scoreCounter.textContent = `Points: ${score}`
-                if (score > 25) {
-                    endGame("win")
-                    return
-                }
-            }, 500)
-        }
+        scoreCounter.textContent = `Points: ${score} + ${num}`
+        setTimeout(function () {
+            score += num
+            scoreCounter.textContent = `Points: ${score}`
+            if (score > 25) {
+                endGame("win")
+                return
+            }
+        }, 500)
     }
 
     function updateLives(num) {
