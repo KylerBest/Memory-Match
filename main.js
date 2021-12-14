@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const board = document.querySelector("#gameBoard")
     const body = document.querySelector("body")
     const scoreCounter = document.querySelector("#score")
@@ -47,7 +47,7 @@ window.addEventListener("DOMContentLoaded", function () {
             this.parent = document.createElement("div")
             this.parent.appendChild(this.img)
             this.parent.appendChild(this.hider)
-            this.parent.addEventListener("click", () => this.onCardClick())
+            this.parent.addEventListener("click", this.onCardClick)
             board.appendChild(this.parent)
         }
         reveal() {
