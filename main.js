@@ -47,27 +47,7 @@ window.addEventListener("DOMContentLoaded", function () {
             this.parent = document.createElement("div")
             this.parent.appendChild(this.img)
             this.parent.appendChild(this.hider)
-            this.parent.addEventListener("click", () => {
-                this.reveal()
-                setTimeout(() => {
-                    if (firstCard) {
-                        if (firstCard.value === this.value) {
-                            updateLives(3)
-                            updateScore(1)
-                            this.remove()
-                            firstCard.remove()
-                            firstCard = null
-                        } else {
-                            updateLives(-1)
-                            this.reset()
-                            firstCard.reset()
-                            firstCard = null
-                        }
-                    } else {
-                        firstCard = this
-                    }
-                }, 1000)
-            })
+            this.parent.addEventListener("click", () => this.onCardClick())
             board.appendChild(this.parent)
         }
         reveal() {
@@ -81,6 +61,27 @@ window.addEventListener("DOMContentLoaded", function () {
             this.hider.classList.remove("remove")
             this.parent.classList.remove("remove")
             this.parent.addEventListener("click", this.onCardClick)
+        }
+        onCardClick = () => {
+            this.reveal()
+            setTimeout(() => {
+                if (firstCard) {
+                    if (firstCard.value === this.value) {
+                        updateLives(3)
+                        updateScore(1)
+                        this.remove()
+                        firstCard.remove()
+                        firstCard = null
+                    } else {
+                        updateLives(-1)
+                        this.reset()
+                        firstCard.reset()
+                        firstCard = null
+                    }
+                } else {
+                    firstCard = this
+                }
+            }, 1000)
         }
     }
 
