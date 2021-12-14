@@ -3,7 +3,7 @@ My phase 1 project idea uses https://deckofcardsapi.com to create a memory-match
 # Here's how it works:
 The cards laid out face-down on the board. If you click on a card, the face of the card is revealed until you click on a second card.
 If the second card you click is the same as the first (suit doesn't matter), then you've made a match and both cards are removed from the board.
-https://cdn-images-1.medium.com/max/800/1*Qq8ZKxYk9fl3zZfJ7D_PvQ.gif
+![Alt Text](https://cdn-images-1.medium.com/max/800/1*Qq8ZKxYk9fl3zZfJ7D_PvQ.gif)
 # Lives:
 To make the game more interesting, I've added some lives. You start with 5.
 When a match is made, you gain 3 lives. If the match is unsuccessful, you lose 1 life.
@@ -17,4 +17,4 @@ When the game ends, you are shown the respective 'YOU WIN' or 'YOU LOSE' screen,
 a 'Play Again?' button, as well as a Leaderboard which you can submit your score to. The leaderboard 
 works with JSON-server https://www.npmjs.com/package/json-server so the ranks are saved after reloading 
 the page. When you submit your score, you fill out a form with your name and the leaderboard gets updated 
-immediately. https://cdn-images-1.medium.com/max/800/1*BNDF0wEsPUXo0mBXr8vN0A.gif
+immediately. ![Alt Text](https://cdn-images-1.medium.com/max/800/1*BNDF0wEsPUXo0mBXr8vN0A.gif)
