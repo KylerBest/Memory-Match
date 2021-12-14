@@ -39,6 +39,16 @@
       "name": "Levi",
       "totalScore": 20,
       "id": 10
+    },
+    {
+      "name": "a",
+      "totalScore": 0,
+      "id": 11
+    },
+    {
+      "name": "",
+      "totalScore": 0,
+      "id": 12
     }
   ]
 }

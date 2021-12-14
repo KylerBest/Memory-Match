@@ -202,8 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
             submitScoreForm.addEventListener("submit", (e) => {
                 e.preventDefault()
                 let input = e.target.children[1].value
-                // submitButton.disabled = true
-                // nameInput.disabled = true
+                submitButton.disabled = true
+                nameInput.disabled = true
                 fetch("http://localhost:3000/high_scores")
                 .then(res => res.json())
                 .then(json => {
@@ -231,8 +231,11 @@ document.addEventListener("DOMContentLoaded", function () {
                                 if(list.querySelectorAll("li").length > 10){
                                     listItems[listItems.length - 1].remove()
                                 }
-                                break
+                                return
                             }
+                        }
+                        if(listItems.length < 10){
+                            list.appendChild(newLi())
                         }
                     }
                     const post = () => {
