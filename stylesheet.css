@@ -26,7 +26,9 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
 }
 header p {
-  font-size: 20px;
+  font-size: 40px;
+  margin: auto;
+  margin-block: 0;
 }
 header h1 {
   margin: 0;
