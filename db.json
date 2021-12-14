@@ -31,19 +31,14 @@
       "id": 7
     },
     {
-      "name": "Joe Mama",
-      "totalScore": 11,
-      "id": 8
-    },
-    {
       "name": "George Washington",
       "totalScore": 47,
-      "id": 12
+      "id": 9
     },
     {
       "name": "Levi",
-      "totalScore": 4,
-      "id": 13
+      "totalScore": 20,
+      "id": 10
     }
   ]
 }

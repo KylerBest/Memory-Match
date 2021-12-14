@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const livesCounter = document.querySelector("#lives")
     let firstCard = null
     let score = 0
-    let lives = 5;
+    let lives = 5
 
     function updateScore(num) {
         if (score < 26) {
@@ -204,13 +204,39 @@ document.addEventListener("DOMContentLoaded", function () {
             submitScoreForm.addEventListener("submit", (e) => {
                 e.preventDefault()
                 let input = e.target.children[1].value
-                submitButton.disabled = true
-                nameInput.disabled = true
+                // submitButton.disabled = true
+                // nameInput.disabled = true
                 fetch("http://localhost:3000/high_scores")
                 .then(res => res.json())
                 .then(json => {
                     let list = document.querySelector("#hsList")
                     let listItems = list.querySelectorAll("li")
+                    const newLi = () => {
+                        let newLi = document.createElement("li")
+                        newLi.textContent = `${input}: ${score + lives}`
+                        newLi.style.background = "yellow"
+                        return newLi
+                    }
+                    const removePreviousLowerScore = () => {
+                        for(const li of listItems){
+                            let content = li.textContent.split(': ')
+                            if(content[0] == input && parseInt(content[1]) < score + lives){
+                                li.remove()
+                            }
+                        }
+                    }
+                    const insertNewScore = () => {
+                        for(const li of listItems){
+                            let content = li.textContent.split(': ')
+                            if(parseInt(content[1]) <= score + lives){
+                                list.insertBefore(newLi(), li)
+                                if(list.querySelectorAll("li").length > 10){
+                                    listItems[listItems.length - 1].remove()
+                                }
+                                break
+                            }
+                        }
+                    }
                     const post = () => {
                         fetch("http://localhost:3000/high_scores", {
                             method: 'POST',
@@ -223,32 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             })
                         })
                         .then(() => {
-                            //Look through the listed entries on the leaderboard when we submit a new one
-                            //if the newly submitted score is better than one of the listed scores then
-                            //(if there are already 10 items on the list) remove the lowest-ranked score  
-                            //and display our new score in the correct position on the list
-                            let index = -1
-                            for(let i = 0; i < listItems.length; i++){
-                                if(parseInt(listItems[i].textContent.split(': ')[1]) <= score + lives){
-                                    index = i
-                                    break
-                                }
-                            }
-                            if(index > -1){
-                                let newLi = document.createElement("li")
-                                newLi.textContent = `${input}: ${score + lives}`
-                                newLi.style.background = "yellow"
-                                list.insertBefore(newLi, listItems[index])
-                                if(listItems.length > 10){
-                                    listItems[listItems.length-1].remove()
-                                }
-                            }
-                            else if(listItems.length < 10){
-                                let newLi = document.createElement("li")
-                                newLi.textContent = `${input}: ${score + lives}`
-                                newLi.style.background = "yellow"
-                                list.appendChild(newLi)
-                            }
+                            insertNewScore()
                         })
                     }
                     const patch = (id) => {
@@ -263,19 +264,16 @@ document.addEventListener("DOMContentLoaded", function () {
                             })
                         })
                         .then(() => {
-                            for(const li of listItems){
-                                if(parseInt(li.textContent.split(': ')[1]) <= score + lives && li.textContent.split(': ')[0] == input){
-                                    li.textContent = `${input}: ${score + lives}`
-                                    li.style.background = "yellow"
-                                    break
-                                }
-                            }
+                            removePreviousLowerScore()
+                            insertNewScore()
                         })
                     }
                     let entryExists = false
                     for(const entry of json){
-                        //if a leaderboard entry with the entered name already exists AND it's a lower score than the current one
-                        //we don't want to submit a duplicate entry, just update the one that's there
+                        //if a leaderboard entry with the entered name 
+                        //already exists AND it's a lower score than the 
+                        //current one we don't want to submit a duplicate  
+                        //entry, just update the one that's there
                         if(entry.name == input){
                             entryExists = true
                             if(entry.totalScore < score + lives){
@@ -285,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                     if(!entryExists)post()
-                    
                 })
                 submitScoreForm.reset()
             })
